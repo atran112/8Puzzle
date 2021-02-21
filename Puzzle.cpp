@@ -13,6 +13,7 @@ Puzzle::Puzzle() {
     
     this->grid = {1, 2, 3, 4, 5, 6, 7, 8, 0};
     this->cost = 0;
+    this->position = 0;
     this->heuristic = 0;
 }
 
@@ -174,7 +175,7 @@ const int Puzzle::calculateDistance(int & num1, int & num2) {
     vector<int> coord1 = getCoordinates(num1);
     vector<int> coord2 = getCoordinates(num2);
     
-    for (unsigned i = 0; i < coord1.size(); ++i) {
+    for (unsigned i = 0; i < 2; ++i) {
         sum += abs(coord1.at(i) - coord2.at(i));
     }
     

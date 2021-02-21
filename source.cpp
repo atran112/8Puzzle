@@ -21,7 +21,7 @@ bool operator<(const Puzzle& p1, const Puzzle& p2) {
 bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
     
     time_t start = time(NULL);
-    int seconds = 60 * 10; // end loop after this time has elapsed
+    int seconds = 60 * 15; // end loop after this time has elapsed
     time_t end = start + seconds;
     
     int maxQSize = 0;
@@ -30,6 +30,11 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
     vector<int> gridSolution {1, 2, 3, 4, 5, 6, 7, 8, 0};
     
     priority_queue<Puzzle> puzzleQ;
+    set<vector<int>> puzzleSet;
+    vector<int> temp = currPuzzle.grid;
+    temp.push_back(currPuzzle.cost);
+    temp.push_back(currPuzzle.heuristic);
+    puzzleSet.insert(temp);
     
     puzzleQ.push(currPuzzle);
     
@@ -49,15 +54,22 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
             return true;
         }
         
-        currPuzzle.display();
+        currPuzzle.display(); //DO NOT DELETE
         
-        cout << "Expanding this Node" << endl;
+        cout << "Expanding this Node" << endl; //DO NOT DELETE
         
         vector<Puzzle> nextPuzzles = currPuzzle.expandPuzzle(heuristicType);
         
         for (unsigned i = 0; i < nextPuzzles.size(); ++i) {
             
-            if (nextPuzzles.at(i).cost <= 31) {
+            Puzzle nextPuzzle = nextPuzzles.at(i);
+            
+            vector<int> temp = nextPuzzle.grid;
+            temp.push_back(nextPuzzle.cost);
+            temp.push_back(nextPuzzle.heuristic);
+            
+            if (puzzleSet.count(temp) == 0) {
+                puzzleSet.insert(temp);
                 puzzleQ.push(nextPuzzles.at(i));
             }
             
@@ -68,7 +80,7 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
         }
         
         if (time(NULL) >= end) {
-            cout << "Timing Out. The function suprassed " << seconds << " seconds." << endl;
+            cout << "Timing Out. The function suprassed " << seconds/60 << " minutes." << endl;
             break;
         }
         
@@ -113,11 +125,11 @@ int main() {
 //        cout << "depth 16" << endl;
 //        grid = {1, 6, 7, 5, 0, 3, 4, 8, 2};
         
-        cout << "depth 20" << endl;
-        grid = {7, 1, 2, 4, 8, 5, 6, 3, 0};
+//        cout << "depth 20" << endl;
+//        grid = {7, 1, 2, 4, 8, 5, 6, 3, 0};
         
-//        cout << "depth 24" << endl;
-//        grid = {0, 7, 2, 4, 6, 1, 3, 5, 8};
+        cout << "depth 24" << endl;
+        grid = {0, 7, 2, 4, 6, 1, 3, 5, 8};
         
         cout << endl;
     }

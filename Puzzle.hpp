@@ -13,8 +13,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <queue>
-#include <list>
-#include <iterator> 
+#include <set>
 
 using namespace std;
 
