@@ -10,47 +10,10 @@
 using namespace std;
 
 Puzzle::Puzzle() {
-    //depth 1
-    //vector<int> temp {1, 2, 3, 4, 5, 6, 7, 0, 8};
-    //this->position = 7;
     
-    //depth 2
-    //vector<int> temp {1, 2, 3, 4, 5, 6, 0, 7, 8};
-    //this->position = 6;
-    
-    //depth 4
-    //vector<int> temp {1, 2, 3, 5, 0, 6, 4, 7, 8};
-    //this->position = 4;
-    
-    //depth 8
-//    vector<int> temp {1, 3, 6, 5, 0, 2, 4, 7, 8};
-//    this->position = 4;
-    
-    //depth 12
-//    vector<int> temp {1, 3, 6, 5, 0, 7, 4, 8, 2};
-//    this->position = 4;
-    
-    //depth 16
-//    vector<int> temp {1, 6, 7, 5, 0, 3, 4, 8, 2};
-//    this->position = 4;
-    
-//    //depth 20
-//    vector<int> temp {7, 1, 2, 4, 8, 5, 6, 3, 0};
-//    this->position = 8;
-    
-    //depth 24
-//    vector<int> temp {0, 7, 2, 4, 6, 1, 3, 5, 8};
-//    this->position = 0;
-    
-    //this->grid = temp;
+    this->grid = {1, 2, 3, 4, 5, 6, 7, 8, 0};
     this->cost = 0;
-    
-    //Misplaced Tiles
     this->heuristic = 0;
-    
-//    this->trace.push_back(Puzzle(this->grid, this->cost, this->heuristic, this->position));
-    
-    //prevPuzzle = nullptr;
 }
 
 Puzzle::Puzzle(const vector<int> &grid, const string& heuristicType) {

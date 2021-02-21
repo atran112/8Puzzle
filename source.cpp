@@ -8,7 +8,8 @@
 #include "Puzzle.hpp"
 
 #include <stdio.h>
-#include <string>
+//#include <string>
+#include <time.h>
 
 using namespace std;
 
@@ -18,6 +19,10 @@ bool operator<(const Puzzle& p1, const Puzzle& p2) {
 
 
 bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
+    
+    time_t start = time(NULL);
+    int seconds = 60 * 10; // end loop after this time has elapsed
+    time_t endwait = start + seconds;
     
     int maxQSize = 0;
     int numExpanded = 0;
@@ -56,7 +61,9 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
         
         for (unsigned i = 0; i < nextPuzzles.size(); ++i) {
             
-            puzzleQ.push(nextPuzzles.at(i));
+            if (nextPuzzles.at(i).cost <= 31) {
+                puzzleQ.push(nextPuzzles.at(i));
+            }
             
         }
         
@@ -65,6 +72,12 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
         }
         
         //cout << "The best state to expand with a g(n) = " << currPuzzle.cost << " and h(n) = " << currPuzzle.heuristic << " is..." << endl;
+        
+        if (time(NULL) >= endwait) {
+            cout << "Timing Out" << endl;
+            cout << endwait << "seconds" << endl;
+            break;
+        }
         
     }
     
