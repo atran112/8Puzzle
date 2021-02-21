@@ -8,7 +8,6 @@
 #include "Puzzle.hpp"
 
 #include <stdio.h>
-//#include <string>
 #include <time.h>
 
 using namespace std;
@@ -64,13 +63,16 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
             
             Puzzle nextPuzzle = nextPuzzles.at(i);
             
-            vector<int> temp = nextPuzzle.grid;
-            temp.push_back(nextPuzzle.cost);
-            temp.push_back(nextPuzzle.heuristic);
+            if (nextPuzzle.cost <= 31) {
             
-            if (puzzleSet.count(temp) == 0) {
-                puzzleSet.insert(temp);
-                puzzleQ.push(nextPuzzles.at(i));
+                vector<int> temp = nextPuzzle.grid;
+                temp.push_back(nextPuzzle.cost);
+                temp.push_back(nextPuzzle.heuristic);
+                
+                if (puzzleSet.count(temp) == 0) {
+                    puzzleSet.insert(temp);
+                    puzzleQ.push(nextPuzzles.at(i));
+                }
             }
             
         }
@@ -113,8 +115,8 @@ int main() {
 //        cout << "depth 2" << endl;
 //        grid = {1, 2, 3, 4, 5, 6, 0, 7, 8};
 //
-//        cout << "depth 4" << endl;
-//        grid = {1, 2, 3, 5, 0, 6, 4, 7, 8};
+        cout << "depth 4" << endl;
+        grid = {1, 2, 3, 5, 0, 6, 4, 7, 8};
 //
 //        cout << "depth 8" << endl;
 //        grid = {1, 3, 6, 5, 0, 2, 4, 7, 8};
@@ -128,8 +130,8 @@ int main() {
 //        cout << "depth 20" << endl;
 //        grid = {7, 1, 2, 4, 8, 5, 6, 3, 0};
         
-        cout << "depth 24" << endl;
-        grid = {0, 7, 2, 4, 6, 1, 3, 5, 8};
+//        cout << "depth 24" << endl;
+//        grid = {0, 7, 2, 4, 6, 1, 3, 5, 8};
         
         cout << endl;
     }
