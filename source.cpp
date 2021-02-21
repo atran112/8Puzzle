@@ -22,7 +22,7 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
     
     time_t start = time(NULL);
     int seconds = 60 * 10; // end loop after this time has elapsed
-    time_t endwait = start + seconds;
+    time_t end = start + seconds;
     
     int maxQSize = 0;
     int numExpanded = 0;
@@ -30,12 +30,8 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
     vector<int> gridSolution {1, 2, 3, 4, 5, 6, 7, 8, 0};
     
     priority_queue<Puzzle> puzzleQ;
-    //set<vector<int>> puzzleGridSet;
     
     puzzleQ.push(currPuzzle);
-    //puzzleGridSet.insert(currPuzzle.grid);
-    
-    //cout << "Expanding State" << endl;
     
     while (!puzzleQ.empty()) {
         Puzzle currPuzzle = puzzleQ.top();
@@ -53,11 +49,11 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
             return true;
         }
         
-        currPuzzle.display(); //delete this?
+        currPuzzle.display();
         
         cout << "Expanding this Node" << endl;
         
-        vector<Puzzle> nextPuzzles = currPuzzle.expandPuzzle(heuristicType); //change this to expand
+        vector<Puzzle> nextPuzzles = currPuzzle.expandPuzzle(heuristicType);
         
         for (unsigned i = 0; i < nextPuzzles.size(); ++i) {
             
@@ -71,11 +67,8 @@ bool findSolution(const Puzzle& currPuzzle, const string& heuristicType) {
             maxQSize = puzzleQ.size();
         }
         
-        //cout << "The best state to expand with a g(n) = " << currPuzzle.cost << " and h(n) = " << currPuzzle.heuristic << " is..." << endl;
-        
-        if (time(NULL) >= endwait) {
-            cout << "Timing Out" << endl;
-            cout << endwait << "seconds" << endl;
+        if (time(NULL) >= end) {
+            cout << "Timing Out. The function suprassed " << seconds << " seconds." << endl;
             break;
         }
         
@@ -98,7 +91,7 @@ int main() {
     
     if (puzzleType == "1") {
         
-        cout << "Using default puzzle" << endl;
+        cout << endl << "Using default puzzle" << endl;
         
         cout << "Puzzle set to ";
         
@@ -140,13 +133,9 @@ int main() {
             
             cin >> row;
             
-            cout << row << endl;
-            
             for (unsigned j = 0; j < row.size(); ++j) {
                 int num = (int) row.at(j) - 48;
                 grid.push_back(num);
-                
-                cout << num <<endl;
             }
         }
     }

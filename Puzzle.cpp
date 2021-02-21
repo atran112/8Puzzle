@@ -135,7 +135,6 @@ void Puzzle::updateHeuristic(const string& heuristicType) {
     int sum = 0;
     
     if (heuristicType == "Misplaced Tiles") {
-        // do function
         
         for (unsigned i = 0; i < grid.size(); ++i) {
             
@@ -147,7 +146,6 @@ void Puzzle::updateHeuristic(const string& heuristicType) {
     }
     
     else if (heuristicType == "Manhattan Distance") {
-        //do function
         
         for (unsigned i = 0; i < grid.size(); ++i) {
             int num1 = (i + 1) % 9;
@@ -177,12 +175,9 @@ const int Puzzle::calculateDistance(int & num1, int & num2) {
     vector<int> coord2 = getCoordinates(num2);
     
     for (unsigned i = 0; i < coord1.size(); ++i) {
-        //cout << "hello" << endl; //delete this
-        //cout << sum << endl; //delee after
         sum += abs(coord1.at(i) - coord2.at(i));
     }
     
-    //cout << "Distance: " << sum << endl;
     return sum;
 }
 
@@ -256,6 +251,4 @@ void Puzzle::display() const {
     cout << endl;
     cout << "g(n) = " << cost << endl;
     cout << "h(n) = " << heuristic << endl;
-    
-//    cout << endl;c
 }
